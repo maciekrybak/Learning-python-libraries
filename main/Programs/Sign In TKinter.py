@@ -60,3 +60,4 @@ class SignUp:
         self.root.mainloop()
 
 SignUp()
+print('nice')

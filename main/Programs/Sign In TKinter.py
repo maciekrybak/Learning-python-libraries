@@ -1,4 +1,5 @@
 import tkinter as tk
+from pydoc import visiblename
 from tkinter import messagebox
 import re
 
@@ -28,8 +29,9 @@ class SignUp:
         self.email_entry = tk.Entry(self.entry_frame)
 
         self.password_text = tk.Label(self.entry_frame, text='Password :')
-        self.password_entry = tk.Entry(self.entry_frame)
-        self.password_visibility_button = tk.Checkbutton(self.entry_frame)
+        self.password_entry = tk.Entry(self.entry_frame,show='*')
+        self.password_visibility_button_value = tk.IntVar()
+        self.password_visibility_button = tk.Checkbutton(self.entry_frame,variable=self.password_visibility_button_value,command=self.checkbox)
         self.password_visibility_button_text = tk.Label(self.entry_frame,text='Show password')
 
         self.validate_button = tk.Button(self.root,text='Validate',font=('Arial',12),padx=30,pady=10
@@ -94,6 +96,16 @@ class SignUp:
             messagebox.showinfo("Validation", "✅ All fields are correct!")
         else:
             messagebox.showinfo("Validation errors", "\n".join(messages))
+
+    def checkbox(self):
+        if self.password_visibility_button_value.get() == 1:
+            self.password_entry.config(show='')
+            print('cry')
+
+        else:
+            self.password_entry.config(show='*')
+            print('hide')
+
 
         #traz robic pattern dla email i haslo w message boxie zlaczyc warunki co jest poprawne a co nie
         # i funckjinalsosc dla check boxa
